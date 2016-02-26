@@ -78,21 +78,21 @@ int main(int argc, char *argv[])
 	char *cmdname = *argv;
 	char *script_file = NULL;
 	int c;
-	const char *lockname = "/var/lock/" CMD_PRINTENV ".lock";
-	int lockfd = -1;
+	// const char *lockname = "/var/lock/" CMD_PRINTENV ".lock";
+	// int lockfd = -1;
 	int retval = EXIT_SUCCESS;
 
-	lockfd = open(lockname, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (-1 == lockfd) {
-		fprintf(stderr, "Error opening lock file %s\n", lockname);
-		return EXIT_FAILURE;
-	}
+	// lockfd = open(lockname, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	// if (-1 == lockfd) {
+	// 	fprintf(stderr, "Error opening lock file %s\n", lockname);
+	// 	return EXIT_FAILURE;
+	// }
 
-	if (-1 == flock(lockfd, LOCK_EX)) {
-		fprintf(stderr, "Error locking file %s\n", lockname);
-		close(lockfd);
-		return EXIT_FAILURE;
-	}
+	// if (-1 == flock(lockfd, LOCK_EX)) {
+	// 	fprintf(stderr, "Error locking file %s\n", lockname);
+	// 	close(lockfd);
+	// 	return EXIT_FAILURE;
+	// }
 
 	if ((p = strrchr (cmdname, '/')) != NULL) {
 		cmdname = p + 1;
@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 	}
 
 exit:
-	flock(lockfd, LOCK_UN);
-	close(lockfd);
+	// flock(lockfd, LOCK_UN);
+	// close(lockfd);
 	return retval;
 }
